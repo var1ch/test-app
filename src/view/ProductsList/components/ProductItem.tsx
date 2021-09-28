@@ -22,6 +22,23 @@ const StyledProductItem = styled.li`
   &:last-child {
     margin-bottom: 25px;
   }
+  a {
+    color: black;
+    text-decoration: none;
+    border: 1px solid grey;
+    margin-right: 16px;
+    padding: 0.7em;
+    border-radius: 3px;
+    &:hover {
+      background-color: grey;
+      color: white;
+    }
+  }
+  button {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 `;
 
 interface Props {
@@ -50,14 +67,18 @@ export default function ProductItem({
         <p className="productDescription">{productDescription}</p>
         <span className="productCount">{productCount}</span>
       </div>
-      <Link
-        to={`/products/${id}`}
-        onClick={() => dispatch(setSelectedProduct({ id, changes: true }))}
-      >
-        Product Details
-      </Link>
-      <button>Edit</button>
-      <button onClick={() => dispatch(deleteProductAction(id))}>Delete</button>
+      <div className={"buttonsBlock"}>
+        <Link
+          to={`/products/${id}`}
+          onClick={() => dispatch(setSelectedProduct({ id, changes: true }))}
+        >
+          Product Details
+        </Link>
+        {/* <button>Edit</button> */}
+        <button onClick={() => dispatch(deleteProductAction(id))}>
+          Delete
+        </button>
+      </div>
     </StyledProductItem>
   );
 }

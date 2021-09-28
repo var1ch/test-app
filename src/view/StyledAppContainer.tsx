@@ -7,6 +7,9 @@ const StyledAppContainer = styled.div`
   margin: 0 auto;
   button {
     padding: 1em;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
