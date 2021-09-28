@@ -1,9 +1,13 @@
 import styled from "styled-components";
 
 const StyledAppContainer = styled.div`
-  width: 1024px;
+  display: flex;
+  flex-direction: column;
+  width: 720px;
   margin: 0 auto;
-  border: 1px solid black;
+  button {
+    padding: 1em;
+  }
 `;
 
 export default StyledAppContainer;

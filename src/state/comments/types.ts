@@ -4,3 +4,8 @@ export interface Comment {
   description: string;
   date: Date;
 }
+
+export interface CommentChanges {
+  id: number;
+  text: string;
+}

@@ -1,7 +1,13 @@
 import type { Comment } from "../comments/types";
 
+export interface ChangesPayload {
+  id: number;
+  changes?: boolean;
+}
+
 export interface Product {
   id: number;
+  isSelected: boolean;
   imageUrl: string;
   name: string;
   count: number;
@@ -10,5 +16,5 @@ export interface Product {
     height: number;
   };
   weight: string;
-  comments: Comment[];
+  comments?: Comment[];
 }
