@@ -1,45 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
 import { deleteProductAction } from "../../../state";
+import { StyledProductItem } from "./StyledProductItem";
 import { Link } from "react-router-dom";
 import { setSelectedProduct } from "../../../state";
-
-const StyledProductItem = styled.li`
-  margin-top: 25px;
-  background-color: white;
-  border-radius: 3px;
-  padding: 1em;
-  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.25);
-  span.productName {
-    font-weight: bold;
-  }
-  img {
-    float: left;
-    margin-right: 16px;
-    width: 150px;
-  }
-  &:last-child {
-    margin-bottom: 25px;
-  }
-  a {
-    color: black;
-    text-decoration: none;
-    border: 1px solid grey;
-    margin-right: 16px;
-    padding: 0.7em;
-    border-radius: 3px;
-    &:hover {
-      background-color: grey;
-      color: white;
-    }
-  }
-  button {
-    &:hover {
-      cursor: pointer;
-    }
-  }
-`;
+import ModalItem from "../../components/ModalItem";
 
 interface Props {
   id: number;
@@ -57,6 +22,15 @@ export default function ProductItem({
   productCount,
 }: Props) {
   const dispatch = useDispatch();
+  const [openModal, setOpenModal] = useState(false);
+
+  const onCloseHandler = () => {
+    setOpenModal(false);
+  };
+  const onConfirmHandler = () => {
+    setOpenModal(false);
+    dispatch(deleteProductAction(id));
+  };
 
   return (
     <StyledProductItem className="productItem">
@@ -75,10 +49,17 @@ export default function ProductItem({
           Product Details
         </Link>
         {/* <button>Edit</button> */}
-        <button onClick={() => dispatch(deleteProductAction(id))}>
-          Delete
-        </button>
+        <button onClick={() => setOpenModal(true)}>Delete</button>
       </div>
+      <ModalItem
+        text="lorem ipsum"
+        title="loram ipsum"
+        confirmButtonTitle="Confirm"
+        closeButtonTitle="Cancel"
+        openModal={openModal}
+        onClose={onCloseHandler}
+        onConfirm={onConfirmHandler}
+      />
     </StyledProductItem>
   );
 }

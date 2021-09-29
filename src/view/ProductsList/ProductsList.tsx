@@ -7,6 +7,7 @@ export default function ProductsList(props: any) {
     <StyledProductsList>
       {props.arr.map((item: any) => (
         <ProductItem
+          key={item.id}
           id={item.id}
           imgUrl={item.imageUrl}
           productName={item.name}

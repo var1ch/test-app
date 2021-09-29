@@ -8,7 +8,7 @@ const commentsSelectors = commentsAdapter.getSelectors(
 
 export const commentByIdSelector = commentsSelectors.selectById;
 
-export const filteredCommentsSelector = createSelector(
+export const allCommentsSelector = createSelector(
   [commentsSelectors.selectAll],
-  (products) => products,
+  (comments) => comments,
 );
