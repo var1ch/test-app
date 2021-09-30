@@ -6,8 +6,6 @@ const productsSelectors = productsAdapter.getSelectors(
   (state: RootState) => state.products,
 );
 
-export const productByIdSelector = productsSelectors.selectById;
-
 export const selectedProductSelector = createSelector(
   productsSelectors.selectAll,
   (products) => products.find((e) => e.isSelected === true),

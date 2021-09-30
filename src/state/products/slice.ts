@@ -1,6 +1,10 @@
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { Product, ChangesPayload } from "./types";
+import type {
+  Product,
+  ChangeStatusPayload,
+  ChangeProductPayload,
+} from "./types";
 
 export const productsAdapter = createEntityAdapter<Product>({
   selectId: (product) => product.id,
@@ -16,7 +20,10 @@ const productsSlice = createSlice({
     deleteProductAction: (state, action: PayloadAction<number>) => {
       productsAdapter.removeOne(state, action.payload);
     },
-    setSelectedProduct: (state, action: PayloadAction<ChangesPayload>) => {
+    setSelectedProductAction: (
+      state,
+      action: PayloadAction<ChangeStatusPayload>,
+    ) => {
       productsAdapter.updateOne(state, {
         id: action.payload.id,
         changes: {
@@ -24,10 +31,30 @@ const productsSlice = createSlice({
         },
       });
     },
+    changeProductAction: (
+      state,
+      action: PayloadAction<ChangeProductPayload>,
+    ) => {
+      productsAdapter.updateOne(state, {
+        id: action.payload.id,
+        changes: {
+          count: +action.payload.count,
+          size: {
+            width: +action.payload.width,
+            height: +action.payload.height,
+          },
+          weight: `${action.payload.weight}g`,
+        },
+      });
+    },
   },
 });
 
-export const { addProductAction, deleteProductAction, setSelectedProduct } =
-  productsSlice.actions;
+export const {
+  addProductAction,
+  deleteProductAction,
+  setSelectedProductAction,
+  changeProductAction,
+} = productsSlice.actions;
 
 export default productsSlice.reducer;

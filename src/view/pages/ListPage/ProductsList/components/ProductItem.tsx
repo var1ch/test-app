@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteProductAction } from "../../../state";
-import { StyledProductItem } from "./StyledProductItem";
+import { deleteProductAction } from "../../../../../state";
 import { Link } from "react-router-dom";
-import { setSelectedProduct } from "../../../state";
-import ModalItem from "../../components/ModalItem";
+import { setSelectedProductAction } from "../../../../../state";
+import ModalItem from "./ModalItem";
 
 interface Props {
   id: number;
@@ -21,19 +20,20 @@ export default function ProductItem({
   productDescription,
   productCount,
 }: Props) {
-  const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
+  const dispatch = useDispatch();
 
   const onCloseHandler = () => {
     setOpenModal(false);
   };
+
   const onConfirmHandler = () => {
-    setOpenModal(false);
     dispatch(deleteProductAction(id));
+    setOpenModal(false);
   };
 
   return (
-    <StyledProductItem className="productItem">
+    <li className="listItem">
       <div className="product">
         <img src={imgUrl} alt="product" />
         <span className="productName">{productName}</span>
@@ -43,23 +43,33 @@ export default function ProductItem({
       </div>
       <div className={"buttonsBlock"}>
         <Link
+          className="regularButton productButton"
           to={`/products/${id}`}
-          onClick={() => dispatch(setSelectedProduct({ id, changes: true }))}
+          onClick={() =>
+            dispatch(setSelectedProductAction({ id, changes: true }))
+          }
         >
           Product Details
         </Link>
         {/* <button>Edit</button> */}
-        <button onClick={() => setOpenModal(true)}>Delete</button>
+        <button
+          className="regularButton productButton"
+          onClick={() => setOpenModal(true)}
+        >
+          Delete
+        </button>
       </div>
-      <ModalItem
-        text="lorem ipsum"
-        title="loram ipsum"
-        confirmButtonTitle="Confirm"
-        closeButtonTitle="Cancel"
-        openModal={openModal}
-        onClose={onCloseHandler}
-        onConfirm={onConfirmHandler}
-      />
-    </StyledProductItem>
+      <ModalItem onClose={onCloseHandler} openModal={openModal}>
+        <>
+          <span className="modalTitle">Delete Product?</span> <br />
+          <button className="modalButton" onClick={onConfirmHandler}>
+            Delete
+          </button>
+          <button className="modalButton" onClick={onCloseHandler}>
+            Cancel
+          </button>
+        </>
+      </ModalItem>
+    </li>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteCommentAction } from "../../../../state";
+import { AiFillDelete } from "react-icons/ai";
 
 interface Props {
   text: string;
@@ -11,9 +12,15 @@ export default function Comment({ text, id }: Props) {
   const dispatch = useDispatch();
 
   return (
-    <div className="comment">
-      <span>{text}</span>
-      <button onClick={() => dispatch(deleteCommentAction(id))}>delete</button>
-    </div>
+    <li>
+      <div className="comment">
+        <span className="commentText">{text}</span>
+        <AiFillDelete
+          className="deleteButton"
+          size={35}
+          onClick={() => dispatch(deleteCommentAction(id))}
+        />
+      </div>
+    </li>
   );
 }

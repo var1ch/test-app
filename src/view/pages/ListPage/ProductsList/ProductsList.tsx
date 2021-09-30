@@ -1,11 +1,15 @@
 import React from "react";
 import ProductItem from "./components/ProductItem";
-import { StyledProductsList } from "./StyledProductsList";
+import type { Product } from "../../../../state";
 
-export default function ProductsList(props: any) {
+interface Props {
+  productsArray: Product[];
+}
+
+export default function ProductsList(props: Props) {
   return (
-    <StyledProductsList>
-      {props.arr.map((item: any) => (
+    <ul className="productsList">
+      {props.productsArray.map((item: any) => (
         <ProductItem
           key={item.id}
           id={item.id}
@@ -15,6 +19,6 @@ export default function ProductsList(props: any) {
           productCount={`Count: ${item.count}`}
         />
       ))}
-    </StyledProductsList>
+    </ul>
   );
 }

@@ -4,3 +4,4 @@ export * from "./products/slice";
 export * from "./comments/selectors";
 export * from "./comments/types";
 export * from "./comments/slice";
+export * from "./store";

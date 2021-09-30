@@ -12,6 +12,24 @@ const StyledModal = styled(ModalUnstyled)`
   display: flex;
   align-items: center;
   justify-content: center;
+  .modalTitle {
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
+  .modalButton {
+    margin-top: 10px;
+    padding: 5px;
+    border: 1px solid black;
+    margin-right: 10px;
+    font-size: 1.3rem;
+    color: black;
+    border-radius: 4px;
+    &:hover {
+      cursor: pointer;
+      background-color: blue;
+      color: white;
+    }
+  }
 `;
 
 const Backdrop = styled("div")`
@@ -27,7 +45,6 @@ const Backdrop = styled("div")`
 
 const style = {
   width: 400,
-  // bgcolor: "background.paper",
   backgroundColor: "white",
   border: "2px solid #000",
   p: 2,
@@ -36,13 +53,9 @@ const style = {
 };
 
 interface Props {
-  title: string;
-  text: string;
+  children: JSX.Element;
   openModal: boolean;
-  closeButtonTitle: string;
-  confirmButtonTitle: string;
   onClose: () => void;
-  onConfirm: () => void;
 }
 
 export default function ModalItem(props: Props) {
@@ -54,12 +67,7 @@ export default function ModalItem(props: Props) {
       aria-describedby="modal-modal-description"
       BackdropComponent={Backdrop}
     >
-      <Box sx={style}>
-        <h2 id="unstyled-modal-title">{props.title}</h2>
-        <p id="unstyled-modal-description">{props.text}</p>
-        <button onClick={props.onConfirm}>{props.confirmButtonTitle}</button>
-        <button onClick={props.onClose}>{props.closeButtonTitle}</button>
-      </Box>
+      <Box sx={style}>{props.children}</Box>
     </StyledModal>
   );
 }

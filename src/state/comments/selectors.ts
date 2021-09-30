@@ -6,8 +6,6 @@ const commentsSelectors = commentsAdapter.getSelectors(
   (state: RootState) => state.comments,
 );
 
-export const commentByIdSelector = commentsSelectors.selectById;
-
 export const allCommentsSelector = createSelector(
   [commentsSelectors.selectAll],
   (comments) => comments,

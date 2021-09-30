@@ -1,8 +1,8 @@
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { Comment } from "./types";
+import { CommentType } from "./types";
 
-export const commentsAdapter = createEntityAdapter<Comment>({
+export const commentsAdapter = createEntityAdapter<CommentType>({
   selectId: (comment) => comment.id,
 });
 
@@ -10,7 +10,7 @@ const commentsSlice = createSlice({
   name: "comments",
   initialState: commentsAdapter.getInitialState(),
   reducers: {
-    addCommentAction: (state, action: PayloadAction<Comment>) => {
+    addCommentAction: (state, action: PayloadAction<CommentType>) => {
       commentsAdapter.addOne(state, action.payload);
     },
     deleteCommentAction: (state, action: PayloadAction<number>) => {

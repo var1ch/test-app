@@ -1,6 +1,6 @@
-import type { Comment } from "../comments/types";
+import type { CommentType } from "../comments/types";
 
-export interface ChangesPayload {
+export interface ChangeStatusPayload {
   id: number;
   changes?: boolean;
 }
@@ -16,5 +16,13 @@ export interface Product {
     height: number;
   };
   weight: string;
-  comments?: Comment[];
+  comments?: CommentType[];
+}
+
+export interface ChangeProductPayload {
+  id: number;
+  count: string;
+  width: string;
+  height: string;
+  weight: string;
 }
